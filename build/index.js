@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Edit() {
   const data = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
-    return select('core').getEntityRecords('postType', 'page', {
+    return select('core').getEntityRecords('postType', 'bio', {
       _embed: true //ADDS FEATURED IMAGE SUPPORT TO QUERY
     });
   });

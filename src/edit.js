@@ -6,7 +6,7 @@ import './editor.scss';
 export default function Edit() {
 
 	const data = useSelect((select) => {
-		return select('core').getEntityRecords('postType', 'page', {
+		return select('core').getEntityRecords('postType', 'bio', {
 			_embed: true, //ADDS FEATURED IMAGE SUPPORT TO QUERY
 		});
 	});
