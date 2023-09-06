@@ -25,18 +25,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//import { useState } from '@wordpress/element';
 
 function Edit() {
+  // const [bios, setBios] = useState([])
+
   const data = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
     return select('core').getEntityRecords('postType', 'bio', {
       _embed: true //ADDS FEATURED IMAGE SUPPORT TO QUERY
     });
   });
 
+  // setBios(data);
+
   console.log(data);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bio Block – hello from the editor!', 'bio-block'));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bio Block – hello from the editor!', 'bio-block'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, !data ? "" : data.map(bio => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      style: {
+        width: "200px",
+        height: "200px"
+      },
+      src: bio._embedded['wp:featuredmedia']['0'].source_url
+    }));
+  })));
 }
 
 /***/ }),
