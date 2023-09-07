@@ -10,3 +10,14 @@
 	color: #fff;
 	padding: 2px;
 }
+
+.bio-image-list{
+	display: flex; 
+	flex-wrap: wrap;
+	gap: .5em; 
+	max-width: 725px;
+}
+
+.bio-image-list li {
+	list-style: none;
+}

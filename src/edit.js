@@ -21,14 +21,17 @@ export default function Edit() {
 	return (
 		<div {...useBlockProps}>
 			{ __( 'Bio Block – hello from the editor!', 'bio-block' ) }
-			<ul>
+			<ul  className="bio-image-list">
 				{!data ? "" : data.map((bio) => 
 					{ return (
 						<li>
 							<img 
 								style={{ 
-									width: "200px", 
-									height: "200px" 
+									maxWidth: "250px",
+   									height: "250px",
+									objectFit: "cover",
+									objectPosition: "top",
+									width: "100%"
 								}}							
 								src={bio._embedded['wp:featuredmedia']['0'].source_url} 
 							/>

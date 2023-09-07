@@ -41,11 +41,16 @@ function Edit() {
   console.log(data);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bio Block – hello from the editor!', 'bio-block'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, !data ? "" : data.map(bio => {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bio Block – hello from the editor!', 'bio-block'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "bio-image-list"
+  }, !data ? "" : data.map(bio => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       style: {
-        width: "200px",
-        height: "200px"
+        maxWidth: "250px",
+        height: "250px",
+        objectFit: "cover",
+        objectPosition: "top",
+        width: "100%"
       },
       src: bio._embedded['wp:featuredmedia']['0'].source_url
     }));
