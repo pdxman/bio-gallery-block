@@ -6,8 +6,6 @@ import './editor.scss';
 
 export default function Edit() {
 
-
-
 	const [bioImages, setBioImages] = useState([])
 
 	const data = useSelect((select) => {
@@ -16,47 +14,97 @@ export default function Edit() {
 		});
 	});
 
-	useEffect(() => {
+	
 		function bioImagesArray(){
+			var urls = []
+
 			if(data){
 				for(var i = 0; i < data.length; i++){
-					console.log(data[i]._embedded['wp:featuredmedia']['0'].source_url)
+					//console.log(data[i]._embedded['wp:featuredmedia']['0'].source_url)
+					urls.push(data[i]._embedded['wp:featuredmedia']['0'].source_url)
 				}
+
 			}
-		
-		}
-	
-		bioImagesArray()
-	})
-	
-	
-	//console.log(data)
-
-	//setBios(data);
-
-	//console.log(data);
-
-	return (
-		<div {...useBlockProps}>
-			{ __( 'Bio Block – hello from the editor!', 'bio-block' ) }
-			<ul  className="bio-image-list">
-				{!data ? "" : data.map((bio) => 
-					{ return (
-						<li>
-							<img 
-								style={{ 
-									maxWidth: "250px",
-   									height: "250px",
-									objectFit: "cover",
-									objectPosition: "top",
-									width: "100%"
-								}}							
-								src={bio._embedded['wp:featuredmedia']['0'].source_url} 
-							/>
-						</li>
-					)}
+			
+			const urlList = urls.map((element) => {
+				return (
+					<p>{element}</p>
 				)}
-			</ul>	
+				// console.log(element)
+			)
+			console.log(urlList)
+			return urlList
+			
+		}
+	//console.log(data)
+	//setBios(data);
+	//console.log(data);
+	return (
+		<div {...useBlockProps} className="bio-image-wrapper">
+			{/* { __( 'Bio Block – hello from the editor!', 'bio-block' ) }
+			<div>
+				{bioImagesArray}
+			</div> */}
+			<div>
+				<ul className="bio-image-list">
+					{!data ? "" : data.map((bio) => 
+						{ return (
+							<li>
+								<img 
+									style={{ 
+										maxWidth: "250px",
+										height: "250px",
+										objectFit: "cover",
+										objectPosition: "top",
+										width: "100%"
+									}}							
+									src={bio._embedded['wp:featuredmedia']['0'].source_url} 
+								/>
+							</li>
+						)}
+					).sort(() => .6 - Math.random() )}
+				</ul>			
+			</div>
+			<div>
+				<ul className="bio-image-list-two">
+					{!data ? "" : data.map((bio) => 
+						{ return (
+							<li>
+								<img 
+									style={{ 
+										maxWidth: "250px",
+										height: "250px",
+										objectFit: "cover",
+										objectPosition: "top",
+										width: "100%"
+									}}							
+									src={bio._embedded['wp:featuredmedia']['0'].source_url} 
+								/>
+							</li>
+						)}
+					).sort(() => .6 - Math.random() )}
+				</ul>							
+			</div>	
+			<div>
+				<ul className="bio-image-list-three">
+					{!data ? "" : data.map((bio) => 
+						{ return (
+							<li>
+								<img 
+									style={{ 
+										maxWidth: "250px",
+										height: "250px",
+										objectFit: "cover",
+										objectPosition: "top",
+										width: "100%"
+									}}							
+									src={bio._embedded['wp:featuredmedia']['0'].source_url} 
+								/>
+							</li>
+						)}
+					).sort(() => .5 - Math.random() )}
+				</ul>							
+			</div>						
 		</div>
 	);
 }
