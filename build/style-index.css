@@ -20,14 +20,47 @@
 
 .bio-image-list {
   display: flex;
-  flex-flow: column;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 0.5em;
-  max-width: 725px;
   position: relative;
-  border: 3px solid green;
-  height: 250px;
-  width: 170px;
+}
+
+@keyframes showHide {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.image-0 {
+  opacity: 0;
+  animation: showHide 5s ease alternate infinite;
+}
+
+.image-1 {
+  opacity: 0;
+  animation: showHide 5s 1s ease alternate infinite;
+}
+
+.image-2 {
+  opacity: 0;
+  animation: showHide 5s 2s ease alternate infinite;
+}
+
+.image-3 {
+  opacity: 0;
+  animation: showHide 5s 3s ease alternate infinite;
+}
+
+.image-4 {
+  opacity: 0;
+  animation: showHide 5s 4s ease alternate infinite;
+}
+
+.image-5 {
+  opacity: 0;
+  animation: showHide 5s 5s ease alternate infinite;
 }
 
 .bio-image-list-two {
@@ -54,25 +87,8 @@
   width: 170px;
 }
 
-.bio-image-list li {
+li {
   list-style: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.bio-image-list-two li {
-  list-style: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.bio-image-list-three li {
-  list-style: none;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

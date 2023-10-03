@@ -8,6 +8,8 @@ export default function Edit() {
 
 	const [bioImages, setBioImages] = useState([])
 
+	// const [bioNum, setBioNum] = useState([])
+
 	const data = useSelect((select) => {
 		return select('core').getEntityRecords('postType', 'bio', {
 			_embed: true, //ADDS FEATURED IMAGE SUPPORT TO QUERY
@@ -38,20 +40,16 @@ export default function Edit() {
 		}
 	//console.log(data)
 	//setBios(data);
-	//console.log(data);
+	console.log(data);
 	return (
 		<div {...useBlockProps} className="bio-image-wrapper">
-			{/* { __( 'Bio Block – hello from the editor!', 'bio-block' ) }
-			<div>
-				{bioImagesArray}
-			</div> */}
 			<div>
 				<ul className="bio-image-list">
-					{!data ? "" : data.map((bio) => 
+					{!data ? "" : data.map((bio, index) => 
 						{ return (
-							<li>
+							<li key={index} className={"image-" + index}>
 								<img 
-									style={{ 
+										style={{ 
 										maxWidth: "250px",
 										height: "250px",
 										objectFit: "cover",
@@ -65,7 +63,7 @@ export default function Edit() {
 					).sort(() => .6 - Math.random() )}
 				</ul>			
 			</div>
-			<div>
+			{/* <div>
 				<ul className="bio-image-list-two">
 					{!data ? "" : data.map((bio) => 
 						{ return (
@@ -104,7 +102,7 @@ export default function Edit() {
 						)}
 					).sort(() => .5 - Math.random() )}
 				</ul>							
-			</div>						
+			</div>						 */}
 		</div>
 	);
 }
