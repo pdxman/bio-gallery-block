@@ -1,24 +1,46 @@
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import { useBlockProps } from '@wordpress/block-editor';
 
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {WPElement} Element to render.
- */
-export default function save() {
+export default function save({attributes}) {
+	const {bioImages} = attributes
+
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Bio Block – hello from the saved content!' }
-		</p>
+		<div { ...useBlockProps.save() } className="bio-image-wrapper">
+			<ul className="bio-image-list">
+				{!bioImages ? "" : bioImages.map((bio, index) => 
+					{ return (
+						<li key={index} className={"image-" + index}>
+							<img 
+									style={{ 
+									maxWidth: "250px",
+									height: "250px",
+									objectFit: "cover",
+									objectPosition: "top",
+									width: "100%"
+								}}							
+								src={bio._embedded['wp:featuredmedia']['0'].source_url} 
+							/>
+						</li>
+					)}
+				).sort(() => .6 - Math.random() )}
+			</ul>			
+		    <ul className="bio-image-list">
+				{!bioImages? "" : bioImages.map((bio, index) => 
+					{ return (
+						<li key={index} className={"image-" + index}>
+							<img 
+								style={{ 
+									maxWidth: "250px",
+									height: "250px",
+									objectFit: "cover",
+									objectPosition: "top",
+									width: "100%"
+								}}							
+								src={bio._embedded['wp:featuredmedia']['0'].source_url} 
+							/>
+						</li>
+					)}
+				).sort(() => .5 - Math.random() )}
+			</ul>							
+		</div>
 	);
 }

@@ -27,8 +27,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Edit() {
-  const [bioImages, setBioImages] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    bioImages
+  } = attributes;
+
+  //const [bioImages, setBioImages] = useState([])
 
   // const [bioNum, setBioNum] = useState([])
 
@@ -38,15 +45,19 @@ function Edit() {
     });
   });
 
+  setAttributes({
+    bioImages: data
+  });
   function bioImagesArray() {
-    var urls = [];
+    //var urls = []
+
     if (data) {
       for (var i = 0; i < data.length; i++) {
         //console.log(data[i]._embedded['wp:featuredmedia']['0'].source_url)
         urls.push(data[i]._embedded['wp:featuredmedia']['0'].source_url);
       }
     }
-    const urlList = urls.map(element => {
+    const urlList = bioImages.map(element => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, element);
     }
     // console.log(element)
@@ -61,9 +72,9 @@ function Edit() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps,
     className: "bio-image-wrapper"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "bio-image-list"
-  }, !data ? "" : data.map((bio, index) => {
+  }, !bioImages ? "" : bioImages.map((bio, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
       key: index,
       className: "image-" + index
@@ -77,7 +88,23 @@ function Edit() {
       },
       src: bio._embedded['wp:featuredmedia']['0'].source_url
     }));
-  }).sort(() => .6 - Math.random()))));
+  }).sort(() => .6 - Math.random())), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "bio-image-list"
+  }, !bioImages ? "" : bioImages.map((bio, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+      key: index,
+      className: "image-" + index
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      style: {
+        maxWidth: "250px",
+        height: "250px",
+        objectFit: "cover",
+        objectPosition: "top",
+        width: "100%"
+      },
+      src: bio._embedded['wp:featuredmedia']['0'].source_url
+    }));
+  }).sort(() => .5 - Math.random())));
 }
 
 /***/ }),
@@ -151,27 +178,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 
-
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {WPElement} Element to render.
- */
-function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Bio Block – hello from the saved content!');
+function save({
+  attributes
+}) {
+  const {
+    bioImages
+  } = attributes;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
+    className: "bio-image-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "bio-image-list"
+  }, !bioImages ? "" : bioImages.map((bio, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+      key: index,
+      className: "image-" + index
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      style: {
+        maxWidth: "250px",
+        height: "250px",
+        objectFit: "cover",
+        objectPosition: "top",
+        width: "100%"
+      },
+      src: bio._embedded['wp:featuredmedia']['0'].source_url
+    }));
+  }).sort(() => .6 - Math.random())), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "bio-image-list"
+  }, !bioImages ? "" : bioImages.map((bio, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+      key: index,
+      className: "image-" + index
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      style: {
+        maxWidth: "250px",
+        height: "250px",
+        objectFit: "cover",
+        objectPosition: "top",
+        width: "100%"
+      },
+      src: bio._embedded['wp:featuredmedia']['0'].source_url
+    }));
+  }).sort(() => .5 - Math.random())));
 }
 
 /***/ }),
@@ -256,7 +305,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/bio-block","version":"0.1.0","title":"Bio Block","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"bio-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/bio-block","version":"0.1.0","title":"Bio Block","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"attributes":{"bioImages":{"type":"array","default":[]}},"textdomain":"bio-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

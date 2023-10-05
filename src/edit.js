@@ -4,9 +4,10 @@ import { useSelect } from '@wordpress/data';
 import { useState, useEffect } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit() {
+export default function Edit({attributes, setAttributes}) {
+	const {bioImages} = attributes
 
-	const [bioImages, setBioImages] = useState([])
+	//const [bioImages, setBioImages] = useState([])
 
 	// const [bioNum, setBioNum] = useState([])
 
@@ -16,9 +17,12 @@ export default function Edit() {
 		});
 	});
 
-	
+	setAttributes({bioImages: data})
+
+
 		function bioImagesArray(){
-			var urls = []
+			//var urls = []
+			
 
 			if(data){
 				for(var i = 0; i < data.length; i++){
@@ -28,7 +32,7 @@ export default function Edit() {
 
 			}
 			
-			const urlList = urls.map((element) => {
+			const urlList = bioImages.map((element) => {
 				return (
 					<p>{element}</p>
 				)}
@@ -43,9 +47,8 @@ export default function Edit() {
 	console.log(data);
 	return (
 		<div {...useBlockProps} className="bio-image-wrapper">
-			<div>
-				<ul className="bio-image-list">
-					{!data ? "" : data.map((bio, index) => 
+			<ul className="bio-image-list">
+					{!bioImages ? "" : bioImages.map((bio, index) => 
 						{ return (
 							<li key={index} className={"image-" + index}>
 								<img 
@@ -62,12 +65,10 @@ export default function Edit() {
 						)}
 					).sort(() => .6 - Math.random() )}
 				</ul>			
-			</div>
-			{/* <div>
-				<ul className="bio-image-list-two">
-					{!data ? "" : data.map((bio) => 
+				<ul className="bio-image-list">
+					{!bioImages? "" : bioImages.map((bio, index) => 
 						{ return (
-							<li>
+							<li key={index} className={"image-" + index}>
 								<img 
 									style={{ 
 										maxWidth: "250px",
@@ -80,10 +81,10 @@ export default function Edit() {
 								/>
 							</li>
 						)}
-					).sort(() => .6 - Math.random() )}
+					).sort(() => .5 - Math.random() )}
 				</ul>							
-			</div>	
-			<div>
+			
+			{/* <div>
 				<ul className="bio-image-list-three">
 					{!data ? "" : data.map((bio) => 
 						{ return (
@@ -102,7 +103,7 @@ export default function Edit() {
 						)}
 					).sort(() => .5 - Math.random() )}
 				</ul>							
-			</div>						 */}
+			</div>						  */}
 		</div>
 	);
 }
